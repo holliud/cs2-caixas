@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Caixa Tempestade - Abertura</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<style>
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background-color: #102c4a;
+      color: white;
+      overflow-x: hidden;
+    }
+    header {
+      background-color: #0b1e36;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 18px;
+      font-weight: 600;
+      color: white;
+      text-decoration: none;
+    }
+    .menu a {
+      margin-left: 20px;
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .menu a:hover {
+      color: #4fc3f7;
+      text-decoration: underline;
+    }
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .balance, .icon-button {
+      background-color: #09325c;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+    .user-dropdown img {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    main {
+      padding: 30px;
+      text-align: center;
+    }
+    .roleta-container {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      margin: 20px auto;
+      overflow: hidden;
+      border: 4px solid #173d66;
+      border-radius: 12px;
+      background: #1c2e49;
+      height: 140px;
+    }
+    .roleta {
+      display: flex;
+      transition: transform 5s cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+    .roleta img {
+      width: 120px;
+      margin: 10px;
+      border-radius: 8px;
+      border: 2px solid #4fc3f7;
+      background: #0e1e2f;
+    }
+    .indicator {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 12px solid transparent;
+      border-right: 12px solid transparent;
+      border-bottom: 20px solid #fdd835;
+      z-index: 2;
+    }
+    .abrir-btn {
+      margin: 20px auto;
+      padding: 12px 30px;
+      font-size: 16px;
+      background-color: #4fc3f7;
+      border: none;
+      color: #102c4a;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .resultado {
+      margin-top: 30px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #fdd835;
+    }
+    .skin-final {
+      margin-top: 10px;
+      display: inline-block;
+    }
+    .skin-final img {
+      width: 180px;
+      border-radius: 10px;
+      border: 3px solid #fdd835;
+    }
+  </style>
+<style>
+@keyframes destaque-drop {
+  0%   { transform: scale(1);    filter: brightness(1); }
+  50%  { transform: scale(1.3);  filter: brightness(1.8); }
+  100% { transform: scale(1);    filter: brightness(1); }
+}
+
+.item-destaque {
+  animation: destaque-drop 1s ease-in-out;
+  z-index: 10;
+}
+</style></head>
+<body>
+<header>
+<a class="logo" href="index.html">CS2 Caixas</a>
+<nav class="menu">
+<a href="index.html">Caixas</a>
+<a href="atualizador.html">Atualizador</a>
+<a href="batalha.html">Batalha de Caixas</a>
+<a href="trocador.html">Trocador</a>
+</nav>
+<div class="user-profile">
+<div class="balance">R$ 0,00</div>
+<div class="icon-button">🪙</div>
+<div class="user-dropdown">
+<img alt="Avatar" src="images/usuario.png"/>
+</div>
+</div>
+</header>
+<main>
+<h1>Abrir Caixa Tempestade</h1>
+<div class="roleta-container">
+<div class="indicator"></div>
+<div class="roleta" id="roleta"></div>
+</div>
+<button class="abrir-btn" onclick="girarRoleta()">Abrir por R$3,99</button>
+<div class="resultado" id="resultado"></div>
+</main>
+<audio id="spin-sound" src="../sounds/roleta.mp3"></audio>
+<audio id="win-sound" src="../sounds/drop.mp3"></audio>
+<audio id="audio-roleta" preload="auto" src="https://cdn.pixabay.com/audio/2022/03/15/audio_b2b6e1d7c0.mp3"></audio><audio id="audio-drop" preload="auto" src="https://cdn.pixabay.com/audio/2022/03/31/audio_c1beebad3f.mp3"></audio><script>
+document.querySelector('.abrir-caixa').addEventListener('click', function() {
+    const roletaAudio = document.getElementById('audio-roleta');
+    const dropAudio = document.getElementById('audio-drop');
+
+    // Reinicia e toca o som da roleta
+    roletaAudio.currentTime = 0;
+    roletaAudio.play();
+
+    // Simula parada da roleta após X segundos (ajuste conforme animação real)
+    setTimeout(() => {
+        roletaAudio.pause();
+        dropAudio.currentTime = 0;
+        dropAudio.play();
+    }, 4500); // 4.5 segundos de giro
+});
+</script><script>
+document.querySelector('.abrir-caixa').addEventListener('click', function () {
+  const roletaAudio = document.getElementById('audio-roleta');
+  const dropAudio = document.getElementById('audio-drop');
+
+  // Sons
+  roletaAudio.currentTime = 0;
+  roletaAudio.play();
+
+  // Simula giro e resultado após 4.5 segundos
+  setTimeout(() => {
+    roletaAudio.pause();
+    dropAudio.currentTime = 0;
+    dropAudio.play();
+
+    // Simula destaque na skin dropada (último item visível, por ex)
+    const items = document.querySelectorAll('.item-roleta');
+    const vencedor = items[Math.floor(items.length / 2)];
+    vencedor.classList.add('item-destaque');
+    setTimeout(() => vencedor.classList.remove('item-destaque'), 1500);
+  }, 4500);
+});
+</script><script>
+const imagens = [
+  "ak-thunderstrike.png",
+  "m4a1s-stormborn.png",
+  "glock-raindrop.png",
+  "usp-skyhunter.png",
+  "awp-lightningcry.png",
+  "famas-thunderline.png",
+  "mac10-cloudsplit.png",
+  "deagle-tempest.png",
+  "mp5-hurricane.png",
+  "tec9-stormcore.png"
+];
+
+const roleta = document.getElementById('roleta');
+const resultado = document.getElementById('resultado');
+const spinSound = document.getElementById('spin-sound');
+const winSound = document.getElementById('win-sound');
+
+const TOTAL_ITENS = 100;
+const ITEM_WIDTH = 140;
+const OFFSET_CENTER = 380;
+
+let listaCompleta = [];
+roleta.innerHTML = '';
+for (let i = 0; i < TOTAL_ITENS; i++) {
+  const nome = imagens[i % imagens.length];
+  const img = document.createElement('img');
+  img.src = `images/skins/${nome}`;
+  img.alt = nome;
+  img.classList.add("item-roleta");
+  roleta.appendChild(img);
+  listaCompleta.push(nome);
+}
+
+function girarRoleta() {
+  resultado.innerHTML = "";
+
+  const escolhido = Math.floor(Math.random() * 30) + 35;
+  const deslocamento = ITEM_WIDTH * escolhido - OFFSET_CENTER;
+
+  roleta.style.transition = "none";
+  roleta.style.transform = "translateX(0px)";
+  void roleta.offsetWidth;
+
+  spinSound.currentTime = 0;
+  spinSound.play();
+
+  // Curva sem overshoot
+  roleta.style.transition = "transform 5.5s cubic-bezier(0.22, 0.61, 0.36, 1)";
+  roleta.style.transform = `translateX(-${deslocamento}px)`;
+
+  setTimeout(() => {
+    spinSound.pause();
+    winSound.currentTime = 0;
+    winSound.play();
+
+    const skin = listaCompleta[escolhido];
+    resultado.innerHTML = "Você ganhou:<br><img src='images/skins/" + skin + "' width='160'>";
+  }, 5500);
+}
+</script></body>
+</html>

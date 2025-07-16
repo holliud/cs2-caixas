@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Registrar - CS2 Caixas</title>
+  <link rel="stylesheet" href="caixas/style.css">
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #111;
+      color: white;
+      font-family: sans-serif;
+    }
+    .register-container {
+      background: #222;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #000;
+      width: 300px;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      border: none;
+    }
+    input {
+      background: #333;
+      color: white;
+    }
+    button {
+      background: #007bff;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="register-container">
+    <h2>Registrar</h2>
+    <input type="text" id="newUser" placeholder="Novo usuário">
+    <input type="password" id="newPass" placeholder="Nova senha">
+    <button onclick="register()">Criar Conta</button>
+    <button onclick="window.location.href='login.html'" style="background:#6c757d;">Voltar</button>
+  </div>
+
+  <script>
+    function register() {
+      const user = document.getElementById('newUser').value.trim();
+      const pass = document.getElementById('newPass').value.trim();
+
+      if (!user || !pass) {
+        alert('Por favor, preencha todos os campos.');
+        return;
+      }
+
+      // Recupera os usuários já cadastrados (objeto)
+      let users = JSON.parse(localStorage.getItem('users') || '{}');
+
+      if (users[user]) {
+        alert('Usuário já existe! Escolha outro nome.');
+        return;
+      }
+
+      // Adiciona o novo usuário
+      users[user] = pass;
+
+      // Salva no localStorage
+      localStorage.setItem('users', JSON.stringify(users));
+
+      alert('Conta criada com sucesso! Você será redirecionado para o login.');
+
+      // Redireciona para login
+      window.location.href = 'login.html';
+    }
+  </script>
+</body>
+</html>

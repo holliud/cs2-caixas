@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Recarregar Saldo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header">
+    <div class="logo" onclick="window.location.href='index.html'">CS2 Caixas</div>
+    <nav class="nav">
+      <a href="index.html">Caixas</a>
+      <a href="atualizador.html">Atualizador</a>
+      <a href="batalha.html">Batalha de Caixas</a>
+      <a href="trocador.html">Trocador</a>
+    </nav>
+    <div class="profile">
+      <div class="balance" onclick="window.location.href='recarregar.html'">
+        <span id="user-balance">R$ 0,00</span>
+      </div>
+      <div class="profile-menu">
+        <img src="perfil_sem_fundo.png" alt="Perfil" class="profile-img" />
+        <div class="dropdown">
+          <a href="#">Perfil</a>
+          <a href="#">Sair</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <h2>Recarregar Saldo</h2>
+    <p>Digite o valor para recarregar gratuitamente seu saldo:</p>
+    <input type="number" id="valor" min="1" placeholder="Valor em R$" style="padding:10px; font-size:16px; border-radius:8px; border:none;">
+    <button onclick="recarregar()" style="margin-left:10px; padding:10px 20px; font-size:16px; border-radius:8px; background:#2563eb; color:white; border:none; cursor:pointer;">Recarregar</button>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    function recarregar() {
+      const valor = parseFloat(document.getElementById('valor').value);
+      if (!isNaN(valor) && valor > 0) {
+        adicionarSaldo(valor);
+        alert('Saldo recarregado com sucesso!');
+      } else {
+        alert('Digite um valor válido.');
+      }
+    }
+  </script>
+</body>
+</html>
